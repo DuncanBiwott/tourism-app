@@ -205,14 +205,14 @@ class _WelcomePageState extends State<WelcomePage> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: const [
-                ShoppingCard(amount: 20, image: 'assets/images/market1.jpg', location: 'Muscat City', market: 'Muscat City Centre',),
-                ShoppingCard(amount: 20, image: 'assets/images/market2.jpg', location: 'Oman', market: 'Oman Avenues Mall',),
-                ShoppingCard(amount: 20, image: 'assets/images/market3.jpeg', location: 'Salalah', market: 'Salalah Gardens Mall',),
-                ShoppingCard(amount: 20, image: 'assets/images/market4.jpg', location: 'Mutrah', market: 'Mutrah Fish Market',),
-                ShoppingCard(amount: 20, image: 'assets/images/market5.jpg', location: 'Muscat', market: 'Muscat Grand Mall',),
-                ShoppingCard(amount: 20, image: 'assets/images/market6.jpg', location: 'Alia', market: 'Alia Gallery ',),
-                ShoppingCard(amount: 20, image: 'assets/images/market7.jpg', location: 'Murtada', market: 'Murtada A.K. Trading Kadok',),
-                ShoppingCard(amount: 20, image: 'assets/images/market3.jpeg', location: 'Markaz', market: 'Markaz Al Bahja ',),
+                ShoppingCard(image: 'assets/images/market1.jpg', location: 'Muscat City', market: 'Muscat City Centre',),
+                ShoppingCard(image: 'assets/images/market2.jpg', location: 'Oman', market: 'Oman Avenues Mall',),
+                ShoppingCard(image: 'assets/images/market3.jpeg', location: 'Salalah', market: 'Salalah Gardens Mall',),
+                ShoppingCard( image: 'assets/images/market4.jpg', location: 'Mutrah', market: 'Mutrah Fish Market',),
+                ShoppingCard( image: 'assets/images/market5.jpg', location: 'Muscat', market: 'Muscat Grand Mall',),
+                ShoppingCard( image: 'assets/images/market6.jpg', location: 'Alia', market: 'Alia Gallery ',),
+                ShoppingCard( image: 'assets/images/market7.jpg', location: 'Murtada', market: 'Murtada A.K. Trading Kadok',),
+                ShoppingCard( image: 'assets/images/market3.jpeg', location: 'Markaz', market: 'Markaz Al Bahja ',),
                   
                 ],
               ),
@@ -269,7 +269,7 @@ class _HotelCardState extends State<HotelCard> {
                 children: [
                   Expanded(
                     child: Text(
-                      'Starting at OMR ${widget.amount}/night',
+                      'Starting at OMR${widget.amount}/night',
                       style: TextStyle(
                         fontSize: 16,
                       ),
@@ -417,7 +417,7 @@ class _FlightCardState extends State<FlightCard> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Starting at ${widget.amount}',
+                    'Starting at OMR${widget.amount}',
                     style: TextStyle(
                       fontSize: 16,
                     ),
@@ -450,9 +450,8 @@ class ShoppingCard extends StatefulWidget {
   final String image;
   final String market;
   final String location;
-  final double amount;
-
-  const ShoppingCard({super.key, required this.image, required this.market, required this.location, required this.amount});
+  
+  const ShoppingCard({super.key, required this.image, required this.market, required this.location});
   @override
   State<ShoppingCard> createState() => _ShoppingCardState();
 
@@ -511,7 +510,7 @@ class _ShoppingCardState extends State<ShoppingCard> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Text(
-                    'OMR ${widget.amount} per person',
+                    '',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
