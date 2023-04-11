@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 
 import '../controller/Root/auth.dart';
@@ -33,8 +34,7 @@ class _SignUpState extends State<SignUp> {
     });
   }
 
-
-  
+bool _isLoading = false;  
 
   @override
   Widget build(BuildContext context) {
@@ -135,6 +135,9 @@ class _SignUpState extends State<SignUp> {
                       
                           ElevatedButton(
                             onPressed: () async {
+                              setState(() {
+                          _isLoading = true; // set loading state
+                        });
                         String? rvalue;
                         if(_passwordcontroller.text !=_cpasswordcontroller.text){
                           rvalue="Password does not much";
@@ -150,21 +153,33 @@ class _SignUpState extends State<SignUp> {
                         if (rvalue == "Success") {
                           _emailcontroller.clear();
                           _passwordcontroller.clear();
+                          Flushbar(
+                            message: "Registration successful",
+                            duration: Duration(seconds: 3),
+                            backgroundColor: Colors.green,
+                            flushbarPosition: FlushbarPosition.TOP,
+                          ).show(context);
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) =>  Login(auth: widget.auth,firestore: widget.firestore,)),
                           );
                         } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(rvalue!)),
-                          );
+                          Flushbar(
+                            message: rvalue!,
+                            duration: Duration(seconds: 3),
+                            backgroundColor: Colors.red,
+                            flushbarPosition: FlushbarPosition.TOP,
+                          ).show(context);
                         }
                       },
                       
                              style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(Colors.black),
                               ),
-                            child: Padding(
+                            child: _isLoading?
+                      CircularProgressIndicator()
+                      :
+                            Padding(
                               padding: EdgeInsets.all(8),
                               child:Row(
                             mainAxisAlignment: MainAxisAlignment.center,
